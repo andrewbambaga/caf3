@@ -1,4 +1,11 @@
 {
   "name": "caf3",
-  "displayName": "caf3"
+  "displayName": "caf3",
+  "expo": {
+    "extra": {
+      "eas": {
+        "projectId": "c7250947-7282-4e3e-bb9e-6abd97dc98f1"
+      }
+    }
+  }
 }
