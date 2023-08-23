@@ -4,13 +4,14 @@ import {createStackNavigator, TransitionPresets} from '@react-navigation/stack'
 import SignInWelcomeScreen from '../screens/authScreens/SignInWelcomeScreen';
 import SignInScreen from '../screens/authScreens/SignInScreen';
 import HomeScreen from '../screens/HomeScreen';
+import RootClientTabs from './ClientTabs';
 
 const Auth = createStackNavigator();
 
 export default function AuthStack(){
     return(
         <Auth.Navigator>
-            <Auth.screen
+            <Auth.Screen
                 name = "SignInWelcomeScreen"
                 component ={SignInWelcomeScreen}
                 options = {{
@@ -19,7 +20,7 @@ export default function AuthStack(){
                 }}
             />
 
-            <Auth.screen
+            <Auth.Screen
                 name = "SignInScreen"
                 component ={SignInScreen}
                 options = {{
@@ -28,14 +29,24 @@ export default function AuthStack(){
                 }}
             />
 
-            <Auth.screen
-                name = "HomeScreen"
-                component ={HomeScreen}
+            <Auth.Screen
+                name = "RootClientTabs"
+                component ={RootClientTabs}
                 options = {{
                     headerShown: false,
                     ...TransitionPresets.RevealFromBottomAndroid
                 }}
-            />           
+            /> 
+
+            <Auth.Screen
+                name = "RestaurantsMapScreen"
+                component ={RestaurantsMapScreen}
+                options = {{
+                    headerShown: false,
+                    ...TransitionPresets.RevealFromBottomAndroid
+                }}
+            />
+
         </Auth.Navigator>
     ) 
 }
