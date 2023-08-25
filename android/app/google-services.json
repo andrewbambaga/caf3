@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "536828151279",
+    "project_id": "caf3-app",
+    "storage_bucket": "caf3-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:536828151279:android:5a00cbf90a404f4515621a",
+        "android_client_info": {
+          "package_name": "com.caf3"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "536828151279-1liqh4h0vgge7mp633v17u3dc52u2hi6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCCgwWKRIL2JnZ0J7H7A_ioa6helgYc7rU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "536828151279-1liqh4h0vgge7mp633v17u3dc52u2hi6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
