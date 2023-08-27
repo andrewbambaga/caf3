@@ -1,25 +1,42 @@
-import React, {useState, useRef}  from "react";
+import React,{useState,useRef,useEffect,useContext} from 'react';
 
-import { View, Text, StyleSheet, Dimensions, Image } from "react-native";
-import {colors, parameters} from "../global/styles"
-import  * as Animatable from 'react-native-animatable'
+import {View, Text, StyleSheet, Dimensions,Image,ScrollView} from 'react-native'
+import {colors, parameters,title} from "../../global/styles"
+import { SignInContext } from '../../contexts/authContext';
+import auth from '@react-native-firebase/auth';
 
-import Swiper from "react-native-swiper"; 
- 
-import { Icon, Button, SocialIcon } from "react-native-elements"
+
+import Swiper from 'react-native-swiper'
+
+import {Icon, Button,SocialIcon} from 'react-native-elements'
 
 export default function SignInWelcomeScreen({navigation}){
+  const {dispatchSignedIn} = useContext(SignInContext)
+
+useEffect(()=>{
+  auth().onAuthStateChanged((user)=>{
+    if(user){
+      dispatchSignedIn({type:"UPDATE_SIGN_IN",payload:{userToken:"signed-in"}})
+    }else{
+      dispatchSignedIn({type:"UPDATE_SIGN_IN",payload:{userToken:null}})
+    }
+  })
+  
+},[])
     return(
-    <View style={{flex:1}}>
+    <ScrollView contentContainerStyle = {{flexGrow: 1,justifyContent: 'space-between'}} >
+    
 
-        <View style={{flex:3,justifyContent:'flex-start',alignItems:'center',paddingTop:20}}>
+        <View style ={{justifyContent:'flex-start',alignItems:'center',paddingTop:20}}>    
             <Text style={{fontSize:26,color:colors.buttons,fontWeight:'bold'}}>DISCOVER RESTAURANTS</Text>
-            <Text style={{fontSize:26,color:colors.buttons,fontWeight:'bold'}}>IN YOUR COLLEGE</Text>
-        </View>
+            <Text style={{fontSize:26,color:colors.buttons,fontWeight:'bold'}}>IN YOUR AREA</Text>     
+         </View> 
 
-        <View style={{flex:4, justifyContent:"center"}}>
-            <Swiper autoplay={true}>
-                <View style={styles.slide1}>
+
+        <View style ={{ }}>
+
+            <Swiper autoplay ={true} style ={{height:250,}}>
+              <View style ={styles.slide1}>
                     <Image 
                             source={{uri:"https://media.istockphoto.com/id/1175505781/photo/arabic-and-middle-eastern-dinner-table-hummus-tabbouleh-salad-fattoush-salad-pita-meat-kebab.webp?b=1&s=612x612&w=0&k=20&c=GOrMA3MILTELKLsXVuuRwoWayj28AnjKKcYL8uFMm-A="}}
                             style={{height:"100%", width:"100%"}}
@@ -43,72 +60,76 @@ export default function SignInWelcomeScreen({navigation}){
             </Swiper>
         </View>
 
-        <View style={{flex:4, justifyContent:"flex-end", marginBottom:20}}>
+        <View style ={{marginBottom:20}}>
 
         <View style ={{marginHorizontal:20, marginTop:30}}>
                 <Button 
-                    title="SIGN IN"
-                    buttonStyle={parameters.styledButton}
+                    title ="SIGN IN"
+                    buttonStyle = {parameters.styledButton}
                     titleStyle = {parameters.buttonTitle}
-                        onPress={()=>{
-                            navigation.navigate("SignInScreen")
-                        }}  
-                />
-            </View>
+                      onPress ={()=>{
+                        navigation.navigate("SignInScreen")
+                      }}
+                   />
+        </View>
 
-            <View style={{ marginHorizontal:20, marginTop:30}}>
+        <View style ={{marginHorizontal:20, marginTop:30}}>
                 <Button 
-                   title="Create an account"
-                   buttonStyle={styles.createButton} 
-                   titleStyle={styles.createButtonTitle}
+                    title ="Create an account"
+                    buttonStyle ={styles.createButton}
+                    titleStyle ={styles.createButtonTitle}
+                    onPress ={()=>{navigation.navigate("SignUpScreen")}}
                 />
             </View>
 
         </View>
 
-    </View>
+
+    </ScrollView>   
     )
 }
 
-const styles=StyleSheet.create({
+
+const styles = StyleSheet.create({
 
     slide1: {
-        flex:1,
-        justifyContent:'center',
-        alignItems:'center',
-        backgroundColor:'#9DD63B'
-    },
-    slide2: {
-        flex:1,
-        justifyContent:'center',
-        alignItems:'center',
-        backgroundColor:'#97CAE5' 
-    },
-    slide3: {
-        flex: 1,
+      height:250,
         justifyContent: 'center',
-        alignItems:'center',
-        backgroundColor:'#92BBD9'
-    },
+        alignItems: 'center',
+        backgroundColor: '#9DD6EB'
+      },
+      slide2: {
+        height:250,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#97CAE5'
+      },
+      slide3: {
+        height:250,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#92BBD9'
+      },
 
-    createButton:{
+      createButton:{
         backgroundColor:"white",
         alignContent:"center",
         justifyContent:"center",
         borderRadius:12,
-        borderWidth:1,
+        borderWidth:1, 
         borderColor:"#ff8c52",
         height:50,
         paddingHorizontal:20,
-        borderColor:colors.buttons
-    },
+        borderColor:colors.buttons,
+      },
 
-    createButtonTitle:{
+      createButtonTitle:{
         color:colors.grey1,
-        fontSize:20,
-        fontWeight:"bold",
+        fontSize:20,  
+        fontWeight:"bold" ,
         alignItems:"center",
-        justifyContent:"center",
-        marginTop: -3
-    }
+        justifyContent:"center"  ,
+        marginTop:-3
+      }
+
 })
